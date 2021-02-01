@@ -12,6 +12,7 @@ public class MatrixTest {
     private IMatrix b;
     private IMatrix c;
     private IMatrix d;
+    private IMatrix e;
     private IMatrix empty;
 
     @Before
@@ -42,6 +43,13 @@ public class MatrixTest {
                 {1, 1}
         };
         d = MatrixFactory.create(rawD);
+
+        double[][] rawE = {
+                {1, 2},
+                {3, 4},
+                {5, 6}
+        };
+        e = MatrixFactory.create(rawE);
     }
 
     @Test
@@ -63,14 +71,40 @@ public class MatrixTest {
 
     @Test
     public void times() {
+        double[][] timesAE = {
+                {9, 12},
+                {9,12}
+        };
+        double[][] timesEA = {
+                {3, 3, 3},
+                {7, 7, 7},
+                {11, 11, 11}
+        };
+
+        assertEquals(MatrixFactory.create(timesAE), (a.times(e)));
+        assertEquals(MatrixFactory.create(timesEA), (e.times(a)));
+
     }
 
     @Test
     public void timesScalar() {
+        double[][] timesAX = {
+                {2, 2, 2},
+                {2, 2, 2}
+        };
+
+        assertEquals(MatrixFactory.create(timesAX), a.times(2));
     }
 
     @Test
     public void add() {
+        double[][] addBC = {
+                {2, 1, 1},
+                {1, 2, 1},
+                {0, 0, 1}
+        };
+
+        assertEquals(MatrixFactory.create(addBC), b.add(c));
     }
 
     @Test
@@ -79,6 +113,13 @@ public class MatrixTest {
 
     @Test
     public void transpose() {
+        double[][] transposeB = {
+                {1, 1, 0},
+                {1, 1, 0},
+                {1, 1, 0}
+        };
+        
+        assertEquals(MatrixFactory.create(transposeB), b.transpose());
     }
 
     @Test
